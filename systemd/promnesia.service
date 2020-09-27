@@ -3,8 +3,8 @@ Description=promnesia Daemon
 
 [Service]
 
-ExecStart=~/.config/promnesia-nix/bin/promnesia serve
+ExecStart=/home/test/.config/promnesia-nix/result/bin/promnesia serve
 
-ExecStartPre=~/.config/promnesia-nix/systemd/promnesia-pre-start.sh
+ExecStartPre=/home/test/.config/promnesia-nix/systemd/promnesia-pre-start.sh
 Restart=on-failure
 

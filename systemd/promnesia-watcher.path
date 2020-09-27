@@ -1,6 +1,6 @@
 [Unit]
 
 [Path]
-PathModified=~/org-notes/
+PathModified=/home/test/org-notes/
 Unit=promnesia-restarter.service
 

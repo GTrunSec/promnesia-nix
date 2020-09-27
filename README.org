@@ -6,13 +6,17 @@ curl -L https://nixos.org/nix/install | sh
 * Build promnesia with nix
 
 #+begin_src sh :async t :exports both :results output
-git cloen https://github.com/GTrunSec/promnesia-nix.git
+git clone https://github.com/GTrunSec/promnesia-nix.git ~/.config/promnesia-nix
 cd promnesia-nix
 nix-build
 #+end_src
+
+#+RESULTS:
+: /nix/store/gjf1qdr4zvr6rmfaivjgk4ii8zyzikvh-promnesia-env
+
 * using result/bin promnesia to deploy it
 :PROPERTIES:
-:header-args:sh: :dir ~/project/promnesia-nix
+:header-args:sh: :dir ~/.config/promnesia-nix
 :END:
 
 #+begin_src sh :async t :exports both :results output
@@ -34,3 +38,53 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
 #+end_example
+
+* promnesia config file
+- replace the org-notes to your own org path in ~config.py~
+#+begin_src sh :async t :exports both :results output
+    Source(
+        auto.index,
+        # just some arbitrary directory with html files
+        # set your own org-path
+        '~/org-notes',
+
+        name='org-notes',
+
+        ignored=[ '*.html', '*.glass', '*.jpeg', '*.png', '*.jpg', '*.py', '*.csv', '*.json', '*.org.organice-bak' ],
+    ),
+
+#+end_src
+
+* setting promnesia.service
+- set your ~username~ path to ~promnesia.service~
+  #+begin_src sh :async t :exports both :results output
+sed -i 's|/home/test|/home/<username>|'  systemd/promnesia*
+  #+end_src
+
+* watching a org-path if the files changed then run promnesia index
+- systemd/promnesia-watcher.path
+#+begin_src sh :async t :exports both :results output
+PathModified=/home/test/org-notes/
+#+end_src
+
+* Copy systemd files to ~/config/systemd/users/
+#+begin_src sh :async t :exports both :results output
+cp systemd/promnesia* ~/.config/systemd/user/
+systemctl --user daemon-reload
+#+end_src
+
+- start all of promnesia.services
+#+begin_src sh :async t :exports both :results output
+systemctl --user start promnesia.service
+systemctl --user start promnesia-watcher.path
+systemctl --user start promnesia-restarter.service
+#+end_src
+
+
+- check status
+
+  #+begin_src sh :async t :exports both :results output
+systemctl --user status promnesia.service
+systemctl --user status promnesia-watcher.path
+systemctl --user status promnesia-restarter.service
+  #+end_src
