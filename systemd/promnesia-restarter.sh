@@ -2,4 +2,4 @@
 set -euo pipefail
 ## Not restart promnesia-restarter immediatally
 sleep 5
-systemctl --user restart promnesia.servicec
+systemctl --user restart promnesia.service

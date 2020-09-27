@@ -1,9 +1,9 @@
 #+TITLE: README
+#+PROPERTY: header-args:sh :prologue "exec 2>&1" :epilogue ":"
 * Install [[https://nixos.org/download.html][NixOS - Getting Nix / NixOS]] Package
 #+begin_src sh :async t :exports both :results output
 curl -L https://nixos.org/nix/install | sh
 #+end_src
-* Build promnesia with nix
 
 #+begin_src sh :async t :exports both :results output
 git clone https://github.com/GTrunSec/promnesia-nix.git ~/.config/promnesia-nix
@@ -41,6 +41,8 @@ optional arguments:
 
 * promnesia config file
 - replace the org-notes to your own org path in ~config.py~
+
+
 #+begin_src sh :async t :exports both :results output
     Source(
         auto.index,
@@ -57,12 +59,16 @@ optional arguments:
 
 * setting promnesia.service
 - set your ~username~ path to ~promnesia.service~
+
   #+begin_src sh :async t :exports both :results output
 sed -i 's|/home/test|/home/<username>|'  systemd/promnesia*
   #+end_src
 
+
 * watching a org-path if the files changed then run promnesia index
 - systemd/promnesia-watcher.path
+
+
 #+begin_src sh :async t :exports both :results output
 PathModified=/home/test/org-notes/
 #+end_src
@@ -74,12 +80,13 @@ systemctl --user daemon-reload
 #+end_src
 
 - start all of promnesia.services
+
+
 #+begin_src sh :async t :exports both :results output
 systemctl --user start promnesia.service
 systemctl --user start promnesia-watcher.path
 systemctl --user start promnesia-restarter.service
 #+end_src
-
 
 - check status
 
@@ -88,3 +95,24 @@ systemctl --user status promnesia.service
 systemctl --user status promnesia-watcher.path
 systemctl --user status promnesia-restarter.service
   #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  ● promnesia.service - promnesia Daemon
+       Loaded: loaded (/home/test/.config/systemd/user/promnesia.service; static; vendor preset: enabled)
+       Active: active (running) since Sun 2020-09-27 06:02:48 EDT; 1min 1s ago
+      Process: 13629 ExecStartPre=/home/test/.config/promnesia-nix/systemd/promnesia-pre-start.sh (code=exited, status=0/SUCCESS)
+     Main PID: 13632 (python3)
+       CGroup: /user.slice/user-1000.slice/user@1000.service/promnesia.service
+               └─13632 python3 -m hug -p 13131 -f /nix/store/42farhbnywcznxgfs06y7zfs79q999xq-python3.8-promnesia-0.11.20200605/lib/python3.8/site-packages/promnesia/server.py
+  ● promnesia-watcher.path
+       Loaded: loaded (/home/test/.config/systemd/user/promnesia-watcher.path; static; vendor preset: enabled)
+       Active: active (waiting) since Sun 2020-09-27 06:01:13 EDT; 2min 36s ago
+     Triggers: ● promnesia-restarter.service
+  ● promnesia-restarter.service
+       Loaded: loaded (/home/test/.config/systemd/user/promnesia-restarter.service; static; vendor preset: enabled)
+       Active: inactive (dead) since Sun 2020-09-27 06:02:48 EDT; 1min 1s ago
+  TriggeredBy: ● promnesia-watcher.path
+      Process: 13618 ExecStart=/home/test/.config/promnesia-nix/systemd/promnesia-restarter.sh (code=exited, status=0/SUCCESS)
+     Main PID: 13618 (code=exited, status=0/SUCCESS)
+  #+end_example
