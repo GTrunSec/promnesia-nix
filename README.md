@@ -1,1 +1,0 @@
-# promnesia-nix

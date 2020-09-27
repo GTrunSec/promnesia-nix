@@ -1,0 +1,23 @@
+#+TITLE: README
+* Install [[https://nixos.org/download.html][NixOS - Getting Nix / NixOS]] Package
+#+begin_src sh :async t :exports both :results output
+curl -L https://nixos.org/nix/install | sh
+#+end_src
+* Build promnesia with nix
+
+#+begin_src sh :async t :exports both :results output
+git cloen https://github.com/GTrunSec/promnesia-nix.git
+cd promnesia-nix
+nix-build
+#+end_src
+* using result/bin promnesia to deploy it
+:PROPERTIES:
+:header-args:sh: :dir ~/project/promnesia-nix
+:END:
+
+#+begin_src sh :async t :exports both :results output
+./result/bin/promnesia -h
+#+end_src
+
+#+RESULTS:
+: 1152921500320363769 lrwxr-xr-x 1 root wheel 65 Dec 31  1969 result/bin -> /nix/store/pzz0vmigv0anpsx142ryydlp12fimys3-python3-3.8.5-env/bin
