@@ -12,32 +12,32 @@ SOURCES = [
     Source(
         auto.index,
         # just some arbitrary directory with html files
-        '~/Dropbox/org-notes',
+        '~/org-notes',
 
         name='org-notes',
 
         ignored=[ '*.html', '*.glass', '*.jpeg', '*.png', '*.jpg', '*.py', '*.csv', '*.json', '*.org.organice-bak' ],
     ),
 
-    Source(
-        auto.index,
-        # just some arbitrary directory with html files
-        '~/.config/nixpkgs/dotfiles/doom-emacs',
+    # Source(
+    #     auto.index,
+    #     # just some arbitrary directory with html files
+    #     '~/.config/nixpkgs/dotfiles/doom-emacs',
 
-        name='doom-emacs',
+    #     name='doom-emacs',
 
-        ignored=[ '*.html', '*.glass', '*.jpeg', '*.png', '*.jpg', '*.el', '*.elc' ],
-    ),
+    #     ignored=[ '*.html', '*.glass', '*.jpeg', '*.png', '*.jpg', '*.el', '*.elc' ],
+    # ),
 
-    Source(
-        auto.index,
-        # just some arbitrary directory with html files
-        '~/Dropbox/org-notes/braindump',
+    # Source(
+    #     auto.index,
+    #     # just some arbitrary directory with html files
+    #     '~/Dropbox/org-notes/braindump',
 
-        name='my-braindump',
+    #     name='my-braindump',
 
-        ignored=[ '*.html', '*.glass', '*.jpeg', '*.png', '*.jpg', '*.el', '*.elc' ],
-    ),
+    #     ignored=[ '*.html', '*.glass', '*.jpeg', '*.png', '*.jpg', '*.el', '*.elc' ],
+    # ),
 ]
 
 '''
