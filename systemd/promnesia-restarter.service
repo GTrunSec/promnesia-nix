@@ -1,0 +1,12 @@
+[Unit]
+
+[Service]
+Environment="LOCALE_ARCHIVE=/nix/store/ssk7zb76r9ydy6h6p7kzjsiqq7amcray-glibc-locales-2.31/lib/locale/locale-archive"
+Environment="PATH=/nix/store/gd3nl6hcc8mzq8fmxdvl6czh3l0n4la5-coreutils-8.31/bin:/nix/store/ab8kxlz6pkaw2qnskqhmrlhbqd8pjq3k-findutils-4.7.0/bin:/nix/store/r8jl0nvjlqzhdmh5vnfrqfnf496gkjy7-gnugrep-3.4/bin:/nix/store/rl2frzwv9gl6b0fxbr0mav432f8h6vs3-gnused-4.8/bin:/nix/store/kg0k2hrldivj2cfr57088nzj8zmvpr06-systemd-245.6/bin:/nix/store/gd3nl6hcc8mzq8fmxdvl6czh3l0n4la5-coreutils-8.31/sbin:/nix/store/ab8kxlz6pkaw2qnskqhmrlhbqd8pjq3k-findutils-4.7.0/sbin:/nix/store/r8jl0nvjlqzhdmh5vnfrqfnf496gkjy7-gnugrep-3.4/sbin:/nix/store/rl2frzwv9gl6b0fxbr0mav432f8h6vs3-gnused-4.8/sbin:/nix/store/kg0k2hrldivj2cfr57088nzj8zmvpr06-systemd-245.6/sbin"
+Environment="TZDIR=/nix/store/gr6rjrscqn0ldhrkq937l5b0qvx5adi1-tzdata-2019c/share/zoneinfo"
+
+
+
+ExecStart=/nix/store/rqxj5qsm49cplnrl3vmg0ix1mj0hzb78-unit-script-promnesia-restarter-start/bin/promnesia-restarter-start 
+Type=oneshot
+

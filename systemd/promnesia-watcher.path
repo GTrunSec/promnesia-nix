@@ -1,0 +1,6 @@
+[Unit]
+
+[Path]
+PathModified=/home/gtrun/Dropbox/org-notes/GTD
+Unit=promnesia-restarter.service
+
